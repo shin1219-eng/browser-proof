@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Run Detail Response",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "url": { "type": "string" },
+    "task": { "type": "string" },
+    "answer": { "type": ["string", "null"] },
+    "evidence_text": { "type": ["string", "null"] },
+    "success": { "type": "boolean" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "screenshot_url": { "type": ["string", "null"] }
+  },
+  "required": ["id", "url", "task", "success", "created_at"]
+}

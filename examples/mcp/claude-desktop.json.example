@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "browser-proof": {
+      "url": "https://proof.reprompt.jp/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}

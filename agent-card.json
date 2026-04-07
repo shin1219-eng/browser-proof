@@ -1,0 +1,42 @@
+{
+  "name": "Browser Proof System",
+  "version": "1.0.0",
+  "type": "A2A Component",
+  "description": "Evidence-backed web verification for agents. Verify claims on public webpages and return text evidence, screenshots, and deterministic JSON.",
+  "capabilities": {
+    "verifyPage": {
+      "endpoint": "POST /api/browser-proof",
+      "receives": {
+        "url": "string (Target URL)",
+        "task": "string (Verification task or claim to extract)",
+        "evidence_mode": "string (optional, default: 'standard')",
+        "wait_strategy": "string (optional, default: 'networkidle')"
+      },
+      "returns": {
+        "success": "boolean",
+        "answer": "string (Answer to the task. null on fail)",
+        "evidence_text": "string (Raw text used as evidence from the page)",
+        "source_url": "string",
+        "checked_at": "string",
+        "screenshot_url": "string (Internal reference to saved screenshot)",
+        "error": "object | null"
+      },
+      "behavior": [
+        "Returns a deterministic JSON format for agent-to-agent communication.",
+        "Includes empirical text evidence and proof of provenance.",
+        "Automatically saves and links a timestamped screenshot."
+      ]
+    },
+    "history": {
+      "endpoints": [
+        "GET /api/runs",
+        "GET /api/runs/:id",
+        "GET /api/runs/:id/screenshot"
+      ],
+      "behavior": [
+        "All historical verification runs and proof data are stored in Supabase.",
+        "History and signed URLs for screenshots can be retrieved via the runs API."
+      ]
+    }
+  }
+}

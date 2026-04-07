@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Browser Proof Request",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "The URL of the webpage to verify."
+    },
+    "task": {
+      "type": "string",
+      "description": "The specific claim or information to verify on the page."
+    },
+    "evidence_mode": {
+      "type": "string",
+      "enum": ["standard", "full"],
+      "default": "standard"
+    },
+    "wait_strategy": {
+      "type": "string",
+      "enum": ["load", "domcontentloaded", "networkidle"],
+      "default": "networkidle"
+    }
+  },
+  "required": ["url", "task"]
+}

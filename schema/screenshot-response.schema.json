@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Screenshot Response",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "id": { "type": "string", "format": "uuid" },
+    "screenshot_url": { "type": ["string", "null"], "description": "Signed URL to view/download the screenshot." }
+  },
+  "required": ["success", "id"]
+}

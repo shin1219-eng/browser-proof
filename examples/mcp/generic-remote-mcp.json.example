@@ -1,0 +1,15 @@
+{
+  "name": "browser-proof",
+  "version": "1.0.0",
+  "description": "Evidence-backed web verification for agents.",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://proof.reprompt.jp/mcp"
+    },
+    {
+      "type": "sse",
+      "url": "https://proof.reprompt.jp/mcp/sse"
+    }
+  ]
+}
