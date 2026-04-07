@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Tool Schema: Browser Proof",
+  "type": "object",
+  "definitions": {
+    "VerificationResult": {
+      "type": "object",
+      "properties": {
+        "success": { "type": "boolean" },
+        "answer": { "type": ["string", "null"] },
+        "evidence_text": { "type": ["string", "null"] },
+        "source_url": { "type": "string" },
+        "checked_at": { "type": "string", "format": "date-time" },
+        "screenshot_url": { "type": ["string", "null"] },
+        "error": { "type": ["object", "null"] }
+      }
+    }
+  }
+}

@@ -2,29 +2,29 @@
   "name": "Browser Proof System",
   "version": "1.0.0",
   "type": "A2A Component",
-  "description": "Evidence-backed web verification for agents. Verify claims on public webpages and return text evidence, screenshots, and deterministic JSON.",
+  "description": "URLを指定してブラウザを起動し、指示されたタスク（情報抽出など）を実行して「回答」と「証拠（エビデンス）」を固定JSONフォーマットで返却するシステム。",
   "capabilities": {
     "verifyPage": {
       "endpoint": "POST /api/browser-proof",
       "receives": {
-        "url": "string (Target URL)",
-        "task": "string (Verification task or claim to extract)",
-        "evidence_mode": "string (optional, default: 'standard')",
-        "wait_strategy": "string (optional, default: 'networkidle')"
+        "url": "string (対象のURL)",
+        "task": "string (ページで確認・抽出したいタスクの指示)",
+        "evidence_mode": "string (省略可, default: 'standard')",
+        "wait_strategy": "string (省略可, default: 'networkidle')"
       },
       "returns": {
         "success": "boolean",
-        "answer": "string (Answer to the task. null on fail)",
-        "evidence_text": "string (Raw text used as evidence from the page)",
+        "answer": "string (タスクに対する回答。失敗時はnull)",
+        "evidence_text": "string (回答の根拠となるページ内のテキスト)",
         "source_url": "string",
         "checked_at": "string",
-        "screenshot_url": "string (Internal reference to saved screenshot)",
+        "screenshot_url": "string (保存されたスクリーショットへの内部参照URL)",
         "error": "object | null"
       },
       "behavior": [
-        "Returns a deterministic JSON format for agent-to-agent communication.",
-        "Includes empirical text evidence and proof of provenance.",
-        "Automatically saves and links a timestamped screenshot."
+        "必ず固定のJSONフォーマットを返します。",
+        "成功時には必ずページ上から取得した証拠を含みます（スクリーンショットも自動保存されます）。",
+        "AIエージェント間でそのまま授受できる安定したインターフェースを提供します。"
       ]
     },
     "history": {
@@ -34,8 +34,8 @@
         "GET /api/runs/:id/screenshot"
       ],
       "behavior": [
-        "All historical verification runs and proof data are stored in Supabase.",
-        "History and signed URLs for screenshots can be retrieved via the runs API."
+        "過去に実行したすべてのタスクの検証履歴（リクエスト、レスポンス、証拠）はデータベースに保存されます。",
+        "runs APIを経由することで、後から実行履歴とスクリーンショット画像（Signed URL）を参照可能です。"
       ]
     }
   }

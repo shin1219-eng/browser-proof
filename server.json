@@ -1,14 +1,13 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.shin1219-eng/browser-proof",
-  "title": "Browser Proof",
-  "description": "Evidence-backed web verification for agents. Verify claims on public webpages and return text evidence, screenshots, and deterministic JSON.",
+  "version": "1.0.0",
+  "description": "Agentic browser verification system for A2A proofing.",
   "repository": {
     "url": "https://github.com/shin1219-eng/browser-proof",
     "source": "github"
   },
-  "version": "1.0.0",
-  "remotes": [
+  "transports": [
     {
       "type": "streamable-http",
       "url": "https://proof.reprompt.jp/mcp"
@@ -17,5 +16,25 @@
       "type": "sse",
       "url": "https://proof.reprompt.jp/mcp/sse"
     }
-  ]
+  ],
+  "capabilities": {
+    "tools": [
+      {
+        "name": "verify_claim",
+        "description": "Verify a claim on a public webpage and return text evidence and a screenshot."
+      },
+      {
+        "name": "list_runs",
+        "description": "List historical verification runs."
+      },
+      {
+        "name": "get_run",
+        "description": "Get details of a specific verification run."
+      },
+      {
+        "name": "get_run_screenshot",
+        "description": "Get the screenshot URL for a specific verification run."
+      }
+    ]
+  }
 }

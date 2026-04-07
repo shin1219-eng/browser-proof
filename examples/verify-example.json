@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "tools/call",
+    "params": {
+      "name": "verify_claim",
+      "arguments": {
+        "url": "https://example.com",
+        "task": "Check if Example Domain heading exists"
+      }
+    }
+  },
+  "response": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"success\": true,\n  \"answer\": \"YES\",\n  \"evidence_text\": \"heading found: Example Domain\",\n  \"source_url\": \"https://example.com\",\n  ... \n}"
+        }
+      ]
+    }
+  }
+}
