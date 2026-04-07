@@ -1,48 +1,108 @@
-# Browser Proof System
+# Browser Proof
 
-The Browser Proof System is an agentic browser verification component designed for **A2A (Agent-to-Agent) Proofing**. 
+**Browser Proof is evidence-backed web verification for agents.**
 
-Unlike generic browser-based AI, this system focuses on specific URL verification, returning evidence-backed structured JSON and maintaining indexed history for auditability and analysis.
+Browser Proof is a verification component for agents that checks claims on public webpages and returns structured results with evidence text, screenshots, and deterministic JSON.
 
-## Core Features
-- **A2A Proofing**: Specialized for agentic interaction with fixed JSON shapes.
-- **Evidence-First**: Every successful verification includes text evidence and an automated screenshot.
-- **Stateless MCP**: Supports the latest "Streamable-HTTP" transport for simple POST-based tool execution.
-- **Stateful SSE**: Supports standard Server-Sent Events for real-time MCP sessions.
-- **Auditable History**: All runs are stored in Supabase with easy retrieval APIs.
+It is **not** a general-purpose browser automation product.  
+It is designed for situations where an agent needs external confirmation with evidence.
 
-## MCP Tool List
-1. `verify_claim`: Automated browser verification based on a natural language task.
-2. `list_runs`: Retrieve verification history.
-3. `get_run`: Detailed report for a specific run.
-4. `get_run_screenshot`: Retrieve the internal storage URL of the evidence screenshot.
+## What it does
 
-## Connection
+Browser Proof helps agents:
 
-### 1. Registry Configuration (`server.json`)
-You can connect your MCP client (like Claude Desktop) using the following configuration:
+- verify whether a claim appears on a public webpage
+- extract supporting evidence text
+- capture a screenshot for auditability
+- return a stable JSON response for downstream systems
+
+## Typical use cases
+
+- **Pricing check**: confirm whether a price is actually shown on a page
+- **Policy validation**: verify whether required language appears on a landing page
+- **Listing QA**: confirm whether a job post, real-estate listing, or product page still matches expected facts
+- **Citation-backed research support**: retrieve the exact text used as evidence
+
+## Quick start
+
+### HTTP API
+
+```bash
+curl -X POST https://proof.reprompt.jp/api/browser-proof \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com",
+    "task": "Check whether this page says it is for use in documentation."
+  }'
+```
+
+Example response:
 
 ```json
 {
-  "mcpServers": {
-    "browser-proof": {
-      "command": "mcp-http-bridge",
-      "args": ["https://proof.reprompt.jp/mcp"],
-      "env": {
-        "AUTH_TOKEN": "your_token_here"
-      }
-    }
-  }
+  "success": true,
+  "answer": "Yes, the page states that it is for use in documentation examples.",
+  "evidence_text": "This domain is for use in documentation examples without needing permission.",
+  "source_url": "https://example.com",
+  "checked_at": "2026-04-08T15:00:00Z",
+  "screenshot_url": "https://proof.reprompt.jp/api/runs/abc-123/screenshot",
+  "error": null
 }
 ```
 
-### 2. Direct API
-Refer to [`openapi.yaml`](./openapi.yaml) for direct integration details.
+## MCP connection
 
-## Documentation
-- [MCP Transports](./docs/mcp-transport.md)
-- [Agent Card](./agent-card.json)
-- [OpenAPI Specification](./openapi.yaml)
+Browser Proof exposes remote MCP endpoints.
 
-## License
-MIT License. See [RIGHTS.md](./RIGHTS.md) for details.
+* **Recommended (Streamable HTTP)**: `https://proof.reprompt.jp/mcp`
+* **SSE**: `https://proof.reprompt.jp/mcp/sse`
+
+See:
+
+* `server.json`
+* `examples/`
+* `docs/mcp.md`
+
+## HTTP endpoints
+
+* `POST /api/browser-proof`
+* `GET /api/runs`
+* `GET /api/runs/:id`
+* `GET /api/runs/:id/screenshot`
+* `GET /health`
+
+## Authentication
+
+Authentication details are not finalized in this public shelf repository.
+Do not document any live secrets or operational credentials here.
+
+## Limits, retention, and privacy
+
+See:
+
+* `docs/limits.md`
+* `docs/retention.md`
+* `docs/privacy.md`
+
+If a value is not finalized, mark it as planned or to be finalized. Do not present tentative values as final.
+
+## Repository purpose
+
+This repository is the **public shelf** for Browser Proof:
+
+* discovery
+* connection details
+* interface reference
+* examples
+* integration guidance
+
+Implementation details live separately in the private core repository.
+
+## Related files
+
+* `agent-card.json`
+* `server.json`
+* `openapi.yaml`
+* `schema/`
+* `examples/`
+* `docs/`
