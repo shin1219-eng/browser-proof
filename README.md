@@ -16,6 +16,29 @@ Browser Proof helps agents:
 - capture a screenshot for auditability
 - return a stable JSON response for downstream systems
 
+## Production access
+
+Production Browser Proof access now requires an API key.
+
+- MCP remote access requires `X-API-Key`
+- HTTP API access requires `X-API-Key`
+- Registry visibility remains public for discovery, but live usage is not anonymous
+
+Current launch plans:
+
+- `trial`: 20 credits / month
+- `starter`: 1000 credits / month
+- `pro`: 10000 credits / month
+
+Initial credit costs:
+
+- `verify_claim`: 5 credits
+- `list_runs`: 1 credit
+- `get_run`: 1 credit
+- `get_run_screenshot`: 1 credit
+
+If you need a key for evaluation or paid use, contact RePrompt through the support or sales channel listed for this project.
+
 ## Typical use cases
 
 - **Pricing check**: confirm whether a price is actually shown on a page
@@ -29,6 +52,7 @@ Browser Proof helps agents:
 
 ```bash
 curl -X POST https://proof.reprompt.jp/api/browser-proof \
+  -H "X-API-Key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://example.com",
@@ -78,8 +102,17 @@ See:
 
 ## Authentication
 
-Authentication details are not finalized in this public shelf repository.
-Do not document any live secrets or operational credentials here.
+Production use requires an API key.
+
+- Preferred header: `X-API-Key: YOUR_API_KEY`
+- Bearer-style client configuration may be supported for compatibility, but `X-API-Key` is the canonical format
+- Do not store live keys in this repository
+- Keys are issued individually and may be rate-limited or credit-limited by plan
+
+See:
+
+- `docs/auth.md`
+- `examples/mcp/`
 
 ## Limits, retention, and privacy
 

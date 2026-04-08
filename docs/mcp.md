@@ -8,10 +8,12 @@ The Browser Proof System natively supports the [Model Context Protocol](https://
 This is the primary method for remote MCP connection to Browser Proof.
 - **Endpoint**: `https://proof.reprompt.jp/mcp`
 - **Method**: `POST` (Standard JSON-RPC over HTTP)
+- **Auth**: `X-API-Key` required
 
 ### 2. SSE (Server-Sent Events)
 For persistent streaming connections.
 - **Endpoint**: `https://proof.reprompt.jp/mcp/sse`
+- **Auth**: `X-API-Key` required
 
 ### 3. Registry
 Browser Proof will be registered in the official MCP Registry with the name:

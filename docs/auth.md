@@ -1,22 +1,40 @@
 # Authentication
 
-The authentication model for the Browser Proof System is still being finalized.
+Production Browser Proof access requires an API key.
 
-## Current Phase: Partner-Only MVP
-During this initial phase, the service endpoint (`proof.reprompt.jp`) is available for authorized partners.
+## Canonical client header
 
-## Current Remote MCP Behavior
+- `X-API-Key: YOUR_API_KEY`
 
-- The canonical remote MCP endpoints are:
-  - `POST https://proof.reprompt.jp/mcp`
-  - `GET https://proof.reprompt.jp/mcp/sse`
-- `server.json` intentionally does not publish live credential material.
-- Internal worker-to-node authentication exists, but it is not exposed in this public shelf repository.
-- Because remote connectivity is currently exposed without client-supplied secret headers in the published `server.json`, consumers should treat connection requirements as subject to change until Registry publish is finalized.
+Bearer-style compatibility may exist for some clients, but `X-API-Key` is the canonical production format for this service.
 
-### Planned Methods
-- **API Keys**: Standard `Authorization: Bearer <KEY>` headers for both REST and MCP endpoints.
-- **A2A Handshake**: Advanced A2A (Agent-to-Agent) discovery and authorization mechanisms.
+## Protected endpoints
 
-## Future Access
-We plan to provide a public registration process for obtaining developer API keys. Stay tuned for updates in this repository.
+- `POST https://proof.reprompt.jp/mcp`
+- `GET https://proof.reprompt.jp/mcp/sse`
+- `POST https://proof.reprompt.jp/api/browser-proof`
+- `GET https://proof.reprompt.jp/api/runs`
+- `GET https://proof.reprompt.jp/api/runs/:id`
+- `GET https://proof.reprompt.jp/api/runs/:id/screenshot`
+
+## Notes
+
+- `server.json` intentionally uses placeholder-style header configuration only
+- do not commit live keys into repository files
+- keys may be disabled, revoked, or limited by monthly credits depending on plan
+- the public Registry entry is for discovery, not anonymous unrestricted use
+
+## Example
+
+```json
+{
+  "headers": {
+    "X-API-Key": "YOUR_API_KEY"
+  }
+}
+```
+
+## Access and support
+
+The initial commercial rollout uses issued keys and plan-based credits.
+If you need trial or paid access, request an API key through the project contact or sales channel.

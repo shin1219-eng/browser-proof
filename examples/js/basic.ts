@@ -3,7 +3,10 @@ async function verifyPage() {
   
   const response = await fetch(`${BROWSER_PROOF_BASE_URL}/api/browser-proof`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": "YOUR_API_KEY"
+    },
     body: JSON.stringify({
       url: "https://example.com",
       task: "Verify that this domain is used for documentation examples."

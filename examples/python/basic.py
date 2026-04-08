@@ -8,7 +8,8 @@ def verify_page():
         "task": "Check if this domain is for use in documentation."
     }
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-API-Key": "YOUR_API_KEY"
     }
 
     response = requests.post(url, json=payload, headers=headers)
