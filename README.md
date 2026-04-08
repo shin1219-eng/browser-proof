@@ -45,10 +45,15 @@ Example response:
   "evidence_text": "This domain is for use in documentation examples without needing permission.",
   "source_url": "https://example.com",
   "checked_at": "2026-04-08T15:00:00Z",
-  "screenshot_url": "https://proof.reprompt.jp/api/runs/abc-123/screenshot",
+  "screenshot_url": "supabase://browser-proof-evidence/example.com/root/2026-04-08T15-00-00-000Z.jpg",
   "error": null
 }
 ```
+
+Notes:
+
+- `screenshot_url` is currently returned as an internal storage reference string.
+- Clients that need a retrievable screenshot URL should use the run retrieval interfaces or MCP tools.
 
 ## MCP connection
 
