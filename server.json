@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.shin1219-eng/browser-proof",
   "title": "Browser Proof",
-  "description": "Evidence-backed web verification for agents. Verify claims on public webpages and return text evidence, screenshots, and deterministic JSON.",
+  "description": "Evidence-backed web verification for agents with deterministic JSON, text evidence, and screenshots.",
   "repository": {
     "url": "https://github.com/shin1219-eng/browser-proof",
     "source": "github"
